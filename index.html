@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SureAgent · Find trustworthy real estate agents in Nigeria</title>
+  <meta name="description" content="Find verified Nigerian real estate agents. Community reviews. Transparent verification. Start in Lagos and expand state by state." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef9ff', 100: '#d9f3ff', 200: '#b6e7ff', 300: '#84d6ff', 400: '#4fc0ff',
+              500: '#1aa7ff', 600: '#0a87db', 700: '#066dae', 800: '#065a8f', 900: '#084c77'
+            },
+            success: '#15b79e',
+            warning: '#f59e0b',
+            error: '#ef4444'
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            display: ['Poppins', 'Inter', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="icon" href="/favicon.ico" />
+  <meta property="og:title" content="SureAgent · Find trustworthy real estate agents in Nigeria" />
+  <meta property="og:description" content="Search agents by city and specialty. Check badges. Read real reviews with proof." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/og.png" />
+  <meta name="theme-color" content="#1aa7ff" />
+  <script type="application/ld+json" id="schemaData"></script>
+  <style>
+    .sr-only-focusable:active, .sr-only-focusable:focus { position: static; width: auto; height: auto; margin: 0; overflow: visible; clip: auto; }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-900 antialiased">
+  <a href="#main" class="sr-only sr-only-focusable">Skip to content</a>
+
+  <!-- Top bar -->
+  <header class="sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-slate-200">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="h-9 w-9 rounded-xl bg-brand-600 text-white grid place-items-center font-bold">SA</div>
+        <span class="font-display text-xl">SureAgent</span>
+      </div>
+      <nav class="hidden md:flex items-center gap-6 text-sm">
+        <a class="hover:text-brand-700" href="#search">Find agents</a>
+        <a class="hover:text-brand-700" href="#how">How it works</a>
+        <a class="hover:text-brand-700" href="#help">Help center</a>
+        <a class="hover:text-brand-700" href="#incidents">Incidents</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <button id="openOnboard" class="rounded-xl bg-brand-600 text-white px-3 py-2 text-sm font-medium hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-400">List your profile</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-b from-brand-50 to-transparent">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <h1 class="font-display text-4xl md:text-5xl leading-tight">Find a trusted real estate agent in Nigeria</h1>
+          <p class="mt-4 text-slate-700">Start in Lagos. Expand across states. Check badges. Read reviews with proof.</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <span class="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1.5 text-sm shadow ring-1 ring-slate-200"><span class="h-2 w-2 rounded-full bg-success"></span> App Verified</span>
+            <span class="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1.5 text-sm shadow ring-1 ring-slate-200"><span class="h-2 w-2 rounded-full bg-brand-600"></span> Community Verified</span>
+            <span class="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1.5 text-sm shadow ring-1 ring-slate-200"><span class="h-2 w-2 rounded-full bg-warning"></span> Govt Recognised</span>
+          </div>
+        </div>
+        <div>
+          <form id="search" class="bg-white rounded-2xl p-4 md:p-6 shadow ring-1 ring-slate-200" autocomplete="off">
+            <legend class="sr-only">Search agents</legend>
+            <div class="grid md:grid-cols-2 gap-4">
+              <label class="text-sm">State
+                <select id="state" class="mt-1 w-full rounded-xl border-slate-300 focus:border-brand-500 focus:ring-brand-500">
+                  <option value="Lagos">Lagos</option>
+                  <option value="Abuja">Abuja</option>
+                  <option value="Rivers">Rivers</option>
+                </select>
+              </label>
+              <label class="text-sm">City
+                <input id="city" class="mt-1 w-full rounded-xl border-slate-300 focus:border-brand-500 focus:ring-brand-500" placeholder="eg Ikoyi" />
+              </label>
+              <label class="text-sm">Specialty
+                <select id="specialty" class="mt-1 w-full rounded-xl border-slate-300 focus:border-brand-500 focus:ring-brand-500">
+                  <option value="Any">Any</option>
+                  <option>Sales</option>
+                  <option>Rentals</option>
+                  <option>Commercial</option>
+                  <option>Luxury</option>
+                </select>
+              </label>
+              <label class="text-sm">Verification tier
+                <select id="tier" class="mt-1 w-full rounded-xl border-slate-300 focus:border-brand-500 focus:ring-brand-500">
+                  <option value="Any">Any</option>
+                  <option>Community Verified</option>
+                  <option>App Verified</option>
+                  <option>Govt Recognised</option>
+                </select>
+              </label>
+              <label class="text-sm">Minimum rating
+                <input id="rating" type="number" min="0" max="5" step="0.5" value="3.5" class="mt-1 w-full rounded-xl border-slate-300 focus:border-brand-500 focus:ring-brand-500" />
+              </label>
+              <label class="text-sm">Active in last
+                <select id="activity" class="mt-1 w-full rounded-xl border-slate-300 focus:border-brand-500 focus:ring-brand-500">
+                  <option value="365">12 months</option>
+                  <option value="180">6 months</option>
+                  <option value="90">3 months</option>
+                </select>
+              </label>
+            </div>
+            <div class="mt-4 flex items-center gap-3">
+              <button type="button" id="runSearch" class="rounded-xl bg-brand-600 text-white px-4 py-2 font-medium hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-400">Search</button>
+              <button type="reset" class="rounded-xl px-4 py-2 ring-1 ring-slate-300 hover:bg-slate-50">Reset</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results -->
+  <main id="main" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-20">
+    <section aria-labelledby="resultsHeading" class="mt-4">
+      <div class="flex items-center justify-between">
+        <h2 id="resultsHeading" class="font-display text-2xl">Agents in Lagos</h2>
+        <div class="text-sm text-slate-600"><span id="resultCount">0</span> results</div>
+      </div>
+
+      <ul id="cards" class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"></ul>
+
+      <template id="cardTmpl">
+        <li class="bg-white rounded-2xl shadow ring-1 ring-slate-200 p-4 flex flex-col">
+          <div class="flex items-center gap-3">
+            <img class="h-12 w-12 rounded-xl object-cover" alt="" />
+            <div>
+              <h3 class="font-semibold leading-tight"></h3>
+              <p class="text-sm text-slate-600"></p>
+            </div>
+          </div>
+          <div class="mt-3 flex flex-wrap gap-2 text-xs" data-badges></div>
+          <div class="mt-3 grid grid-cols-3 gap-2 text-center text-xs">
+            <div class="rounded-xl bg-slate-50 p-2"><div class="font-semibold" data-rating></div><div class="text-slate-500">Avg rating</div></div>
+            <div class="rounded-xl bg-slate-50 p-2"><div class="font-semibold" data-years></div><div class="text-slate-500">Years active</div></div>
+            <div class="rounded-xl bg-slate-50 p-2"><div class="font-semibold" data-deals></div><div class="text-slate-500">Past deals</div></div>
+          </div>
+          <div class="mt-3 text-sm text-slate-700" data-areas></div>
+          <div class="mt-4 flex gap-2 mt-auto">
+            <button class="grow rounded-xl px-3 py-2 ring-1 ring-slate-300 hover:bg-slate-50" data-view>View profile</button>
+            <button class="rounded-xl px-3 py-2 bg-brand-600 text-white hover:bg-brand-700" data-review>Write a review</button>
+          </div>
+        </li>
+      </template>
+    </section>
+
+    <!-- How it works -->
+    <section id="how" class="mt-16">
+      <h2 class="font-display text-2xl">How verification works</h2>
+      <div class="mt-4 grid md:grid-cols-3 gap-4">
+        <div class="bg-white rounded-2xl p-4 shadow ring-1 ring-slate-200">
+          <h3 class="font-semibold">Community Verified</h3>
+          <p class="text-sm text-slate-700 mt-1">Reviews from real clients with proof on file.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-4 shadow ring-1 ring-slate-200">
+          <h3 class="font-semibold">App Verified</h3>
+          <p class="text-sm text-slate-700 mt-1">KYC passed and references checked by our team.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-4 shadow ring-1 ring-slate-200">
+          <h3 class="font-semibold">Govt Recognised</h3>
+          <p class="text-sm text-slate-700 mt-1">Listed by a state regulator with reference ID shown.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Help center and incidents -->
+    <section id="help" class="mt-16">
+      <h2 class="font-display text-2xl">Help center</h2>
+      <div class="mt-4 grid md:grid-cols-2 gap-4">
+        <article class="bg-white rounded-2xl p-4 shadow ring-1 ring-slate-200">
+          <h3 class="font-semibold">How to spot rental scams</h3>
+          <p class="text-sm text-slate-700 mt-1">Ask for site visits. Never pay cash without a receipt. Use escrow where possible.</p>
+          <button class="mt-3 text-brand-700 text-sm">Read more</button>
+        </article>
+        <article id="incidents" class="bg-white rounded-2xl p-4 shadow ring-1 ring-slate-200">
+          <h3 class="font-semibold">Monthly incident summary</h3>
+          <ul class="mt-2 list-disc list-inside text-sm text-slate-700" id="incidentList"></ul>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-200 bg-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 grid md:grid-cols-3 gap-8 text-sm">
+      <div>
+        <div class="flex items-center gap-3">
+          <div class="h-8 w-8 rounded-xl bg-brand-600 text-white grid place-items-center font-bold">SA</div>
+          <span class="font-semibold">SureAgent</span>
+        </div>
+        <p class="mt-3 text-slate-600">Helping buyers and tenants find trustworthy agents.</p>
+        <p class="mt-2 text-slate-500">© <span id="year"></span> SureAgent</p>
+      </div>
+      <div>
+        <h4 class="font-semibold">Pages</h4>
+        <ul class="mt-2 space-y-2">
+          <li><button class="text-slate-700 hover:text-brand-700" data-open="review">Write a review</button></li>
+          <li><button class="text-slate-700 hover:text-brand-700" data-open="report">Report an issue</button></li>
+          <li><button class="text-slate-700 hover:text-brand-700" id="openOnboard2">Agent onboarding and KYC</button></li>
+          <li><button class="text-slate-700 hover:text-brand-700" data-open="admin">Admin console</button></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold">Safety</h4>
+        <ul class="mt-2 space-y-2 text-slate-700">
+          <li>PII encrypted at rest and in transit</li>
+          <li>Redaction for ID numbers</li>
+          <li>OTP login for users and agents</li>
+          <li>Audit logs from day one</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Review modal -->
+  <dialog id="reviewModal" class="rounded-2xl w-full max-w-xl p-0 shadow-2xl">
+    <form method="dialog" class="bg-white rounded-2xl">
+      <div class="p-5 border-b border-slate-200 flex items-center justify-between">
+        <h3 class="font-semibold">Write a review</h3>
+        <button class="text-slate-500" value="cancel" aria-label="Close">✕</button>
+      </div>
+      <div class="p-5 space-y-4">
+        <label class="text-sm w-full">Your name
+          <input class="mt-1 w-full rounded-xl border-slate-300 focus:border-brand-500 focus:ring-brand-500" placeholder="Optional" />
+        </label>
+        <label class="text-sm w-full">Rating
+          <input type="range" min="1" max="5" step="1" value="5" class="mt-2 w-full" oninput="document.getElementById('stars').textContent=this.value" />
+          <span id="stars" class="text-sm">5</span>
+        </label>
+        <label class="text-sm w-full">Short text
+          <textarea rows="3" class="mt-1 w-full rounded-xl border-slate-300 focus:border-brand-500 focus:ring-brand-500" placeholder="Share what went well and what can improve"></textarea>
+        </label>
+        <label class="text-sm w-full">Upload proof of transaction
+          <input type="file" class="mt-1 w-full rounded-xl border-slate-300" />
+        </label>
+        <label class="text-sm w-full">Your identity level
+          <select class="mt-1 w-full rounded-xl border-slate-300 focus:border-brand-500 focus:ring-brand-500">
+            <option>Anonymous</option>
+            <option>Email verified</option>
+            <option>Phone verified</option>
+          </select>
+        </label>
+        <p class="text-xs text-slate-500">We show review weight if you are verified.</p>
+      </div>
+      <div class="p-5 border-t border-slate-200 flex items-center justify-end gap-3">
+        <button class="rounded-xl px-3 py-2 ring-1 ring-slate-300" value="cancel">Cancel</button>
+        <button class="rounded-xl px-3 py-2 bg-brand-600 text-white" value="submit">Submit</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Report modal -->
+  <dialog id="reportModal" class="rounded-2xl w-full max-w-xl p-0 shadow-2xl">
+    <form method="dialog" class="bg-white rounded-2xl">
+      <div class="p-5 border-b border-slate-200 flex items-center justify-between">
+        <h3 class="font-semibold">Report fraud or issue</h3>
+        <button class="text-slate-500" value="cancel" aria-label="Close">✕</button>
+      </div>
+      <div class="p-5 space-y-4">
+        <label class="text-sm w-full">Tell us what happened
+          <textarea rows="4" class="mt-1 w-full rounded-xl border-slate-300 focus:border-brand-500 focus:ring-brand-500"></textarea>
+        </label>
+        <label class="text-sm w-full">Upload evidence
+          <input type="file" class="mt-1 w-full rounded-xl border-slate-300" multiple />
+        </label>
+        <label class="text-sm w-full">Email or phone for updates
+          <input class="mt-1 w-full rounded-xl border-slate-300 focus:border-brand-500 focus:ring-brand-500" placeholder="We send a tracking code" />
+        </label>
+      </div>
+      <div class="p-5 border-t border-slate-200 flex items-center justify-end gap-3">
+        <button class="rounded-xl px-3 py-2 ring-1 ring-slate-300" value="cancel">Cancel</button>
+        <button class="rounded-xl px-3 py-2 bg-brand-600 text-white" value="submit">Submit</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Onboarding modal -->
+  <dialog id="onboardModal" class="rounded-2xl w-full max-w-2xl p-0 shadow-2xl">
+    <form method="dialog" class="bg-white rounded-2xl">
+      <div class="p-5 border-b border-slate-200 flex items-center justify-between">
+        <h3 class="font-semibold">Agent onboarding and KYC</h3>
+        <button class="text-slate-500" value="cancel" aria-label="Close">✕</button>
+      </div>
+      <div class="p-5 grid md:grid-cols-2 gap-4">
+        <label class="text-sm">Full name
+          <input class="mt-1 w-full rounded-xl border-slate-300 focus:border-brand-500 focus:ring-brand-500" required />
+        </label>
+        <label class="text-sm">Phone number
+          <input type="tel" class="mt-1 w-full rounded-xl border-slate-300 focus:border-brand-500 focus:ring-brand-500" placeholder="OTP will be sent" required />
+        </label>
+        <label class="text-sm">Email
+          <input type="email" class="mt-1 w-full rounded-xl border-slate-300 focus:border-brand-500 focus:ring-brand-500" />
+        </label>
+        <label class="text-sm">Years active
+          <input type="number" min="0" class="mt-1 w-full rounded-xl border-slate-300 focus:border-brand-500 focus:ring-brand-500" />
+        </label>
+        <label class="text-sm">NIN or BVN or RC number
+          <input class="mt-1 w-full rounded-xl border-slate-300 focus:border-brand-500 focus:ring-brand-500" placeholder="We will redact on public pages" required />
+        </label>
+        <label class="text-sm">Selfie for match
+          <input type="file" accept="image/*" class="mt-1 w-full rounded-xl border-slate-300" required />
+        </label>
+        <label class="text-sm md:col-span-2">Documents
+          <input type="file" class="mt-1 w-full rounded-xl border-slate-300" multiple />
+        </label>
+        <label class="text-sm md:col-span-2">Bio
+          <textarea rows="3" class="mt-1 w-full rounded-xl border-slate-300 focus:border-brand-500 focus:ring-brand-500" placeholder="Tell clients about your work"></textarea>
+        </label>
+      </div>
+      <div class="p-5 border-t border-slate-200 flex items-center justify-end gap-3">
+        <button class="rounded-xl px-3 py-2 ring-1 ring-slate-300" value="cancel">Cancel</button>
+        <button class="rounded-xl px-3 py-2 bg-brand-600 text-white" value="submit">Submit</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Admin modal stub -->
+  <dialog id="adminModal" class="rounded-2xl w-full max-w-4xl p-0 shadow-2xl">
+    <form method="dialog" class="bg-white rounded-2xl">
+      <div class="p-5 border-b border-slate-200 flex items-center justify-between">
+        <h3 class="font-semibold">Admin console</h3>
+        <button class="text-slate-500" value="cancel" aria-label="Close">✕</button>
+      </div>
+      <div class="p-5 grid md:grid-cols-3 gap-4 text-sm">
+        <div class="bg-slate-50 rounded-xl p-4">
+          <h4 class="font-semibold">KYC queue</h4>
+          <ul id="kycQueue" class="mt-2 space-y-2"></ul>
+        </div>
+        <div class="bg-slate-50 rounded-xl p-4">
+          <h4 class="font-semibold">Review moderation</h4>
+          <ul id="moderation" class="mt-2 space-y-2"></ul>
+        </div>
+        <div class="bg-slate-50 rounded-xl p-4">
+          <h4 class="font-semibold">Red flags</h4>
+          <ul id="flags" class="mt-2 space-y-2"></ul>
+        </div>
+      </div>
+      <div class="p-5 border-t border-slate-200 flex items-center justify-end gap-3">
+        <button class="rounded-xl px-3 py-2 ring-1 ring-slate-300" value="cancel">Close</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script>
+    const sampleAgents = [
+      { id: 'a1', name: 'Adaeze Okafor', city: 'Ikoyi', state: 'Lagos', avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop', specialties: ['Rentals','Luxury'], areas: ['Ikoyi','Lekki'], tier: 'App Verified', rating: 4.8, years: 7, deals: 56, lastActiveDays: 30, badges: ['App Verified','Community Verified'] },
+      { id: 'a2', name: 'Tunde Adebayo', city: 'Lekki', state: 'Lagos', avatar: 'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=200&auto=format&fit=crop', specialties: ['Sales','Commercial'], areas: ['Lekki','Victoria Island'], tier: 'Govt Recognised', rating: 4.5, years: 10, deals: 120, lastActiveDays: 12, badges: ['Govt Recognised','Community Verified'] },
+      { id: 'a3', name: 'Maryam Bello', city: 'Ajah', state: 'Lagos', avatar: 'https://images.unsplash.com/photo-1541532713592-79a0317b6b77?q=80&w=200&auto=format&fit=crop', specialties: ['Rentals'], areas: ['Ajah'], tier: 'Community Verified', rating: 4.2, years: 3, deals: 22, lastActiveDays: 90, badges: ['Community Verified'] }
+    ];
+
+    const incidents = [
+      { month: 'September 2025', text: '12 reports. 7 resolved. 3 in review. 2 escalated to regulator.' },
+      { month: 'August 2025', text: '9 reports. 9 resolved. 0 in review.' }
+    ];
+
+    const cardsEl = document.getElementById('cards');
+    const countEl = document.getElementById('resultCount');
+
+    function badgePill(label){
+      const map = { 'Community Verified': 'bg-brand-50 text-brand-800', 'App Verified': 'bg-emerald-50 text-emerald-800', 'Govt Recognised': 'bg-amber-50 text-amber-800' };
+      const span = document.createElement('span');
+      span.className = `text-xs px-2 py-1 rounded-full ${map[label]||'bg-slate-100'}`;
+      span.textContent = label;
+      return span;
+    }
+
+    function render(list){
+      cardsEl.innerHTML = '';
+      list.forEach(a => {
+        const t = document.getElementById('cardTmpl').content.cloneNode(true);
+        const img = t.querySelector('img');
+        const h3 = t.querySelector('h3');
+        const p = t.querySelector('p');
+        const badges = t.querySelector('[data-badges]');
+        t.querySelector('[data-rating]').textContent = a.rating.toFixed(1);
+        t.querySelector('[data-years]').textContent = a.years;
+        t.querySelector('[data-deals]').textContent = a.deals;
+        t.querySelector('[data-areas]').textContent = `Service areas · ${a.areas.join(', ')}`;
+        img.src = a.avatar; img.alt = `${a.name} photo`;
+        h3.textContent = a.name;
+        p.textContent = `${a.city}, ${a.state} · ${a.specialties.join(' · ')}`;
+        a.badges.forEach(b => badges.appendChild(badgePill(b)));
+        t.querySelector('[data-view]').addEventListener('click', () => openProfile(a));
+        t.querySelector('[data-review]').addEventListener('click', () => document.getElementById('reviewModal').showModal());
+        cardsEl.appendChild(t);
+      });
+      countEl.textContent = list.length;
+    }
+
+    function filter(){
+      const state = document.getElementById('state').value;
+      const city = document.getElementById('city').value.toLowerCase();
+      const spec = document.getElementById('specialty').value;
+      const tier = document.getElementById('tier').value;
+      const min = parseFloat(document.getElementById('rating').value || '0');
+      const activity = parseInt(document.getElementById('activity').value,10);
+      return sampleAgents.filter(a =>
+        a.state === state &&
+        (city === '' || a.city.toLowerCase().includes(city)) &&
+        (spec === 'Any' || a.specialties.includes(spec)) &&
+        (tier === 'Any' || a.badges.includes(tier)) &&
+        a.rating >= min &&
+        a.lastActiveDays <= activity
+      );
+    }
+
+    document.getElementById('runSearch').addEventListener('click', () => render(filter()));
+
+    // Modals
+    document.querySelectorAll('[data-open="review"]').forEach(b => b.addEventListener('click', () => document.getElementById('reviewModal').showModal()));
+    document.querySelectorAll('[data-open="report"]').forEach(b => b.addEventListener('click', () => document.getElementById('reportModal').showModal()));
+    document.getElementById('openOnboard').addEventListener('click', () => document.getElementById('onboardModal').showModal());
+    document.getElementById('openOnboard2').addEventListener('click', () => document.getElementById('onboardModal').showModal());
+    document.querySelector('[data-open="admin"]').addEventListener('click', () => document.getElementById('adminModal').showModal());
+
+    // Admin stub lists
+    const kycQueue = document.getElementById('kycQueue');
+    const moderation = document.getElementById('moderation');
+    const flags = document.getElementById('flags');
+    ['Adaeze Okafor','Tunde Adebayo'].forEach(n => {
+      const li = document.createElement('li');
+      li.textContent = `${n} · KYC pending`; kycQueue.appendChild(li);
+    });
+    ['Review 1834','Review 1835'].forEach(n => {
+      const li = document.createElement('li');
+      li.textContent = `${n} · Needs check`; moderation.appendChild(li);
+    });
+    ['Duplicate listing','ID mismatch'].forEach(n => {
+      const li = document.createElement('li');
+      li.textContent = n; flags.appendChild(li);
+    });
+
+    // Incidents
+    const incidentList = document.getElementById('incidentList');
+    incidents.forEach(i => {
+      const li = document.createElement('li');
+      li.textContent = `${i.month} · ${i.text}`; incidentList.appendChild(li);
+    });
+
+    // Profile view as JSON-LD and alert for demo
+    function openProfile(a){
+      const data = {
+        '@context': 'https://schema.org', '@type': 'RealEstateAgent',
+        name: a.name, address: { '@type': 'PostalAddress', addressLocality: a.city, addressRegion: a.state, addressCountry: 'NG' },
+        areaServed: a.areas, aggregateRating: { '@type': 'AggregateRating', ratingValue: a.rating, reviewCount: a.deals },
+        sameAs: []
+      };
+      document.getElementById('schemaData').textContent = JSON.stringify(data);
+      alert(`${a.name} profile would open here in a full app`);
+    }
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Initial render
+    render(sampleAgents);
+  </script>
+</body>
+</html>
